@@ -19,11 +19,12 @@ public class EmployeeScreen {
 	static Customer c = new Customer();
 	static Item i = new Item();
 	
-	public static void display() {
+	public static void display(Employee persistedEmp) {
+		Employee currentEmp = persistedEmp;
 		EmployeeDao ed = new EmployeePostgres();
 		CustomerDao cd = new CustomerPostgres();
 		ItemDao id = new ItemPostgres();
-
+		 
 		String input;
 		do {
 			System.out.println("Enter \n1 to add item \n2 to view pending offers \n3 to remove items \n4 to view all payments \n5 add new employee");

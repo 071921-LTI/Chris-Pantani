@@ -39,6 +39,14 @@ public class Item implements  Serializable{
 		this.employee = employee;
 		this.customer = customer;
 	}
+	
+	public Item(int id, String name,String itemDescription, boolean itemSold) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.itemDescription = itemDescription;
+		this.itemSold = itemSold;
+	}
 
 	public int getId() {
 		return id;

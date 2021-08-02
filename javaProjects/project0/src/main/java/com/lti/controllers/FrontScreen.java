@@ -54,7 +54,7 @@ public class FrontScreen {
 							int cusId = persistedCus.getId();
 							currentCus = new Customer(cusId);
 							System.out.println("it works");
-							//CustomerScreen.display();
+							CustomerScreen.display(persistedCus);
 							input = "3";
 							break;
 						}else {
@@ -87,7 +87,7 @@ public class FrontScreen {
 						int empId = persistedEmp.getId();
 						currentEmp = new Employee(empId);
 						System.out.println("it works");
-						EmployeeScreen.display();
+						EmployeeScreen.display(persistedEmp);
 						input = "3";
 						break;
 					}else {

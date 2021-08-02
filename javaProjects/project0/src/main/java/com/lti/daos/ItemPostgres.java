@@ -78,6 +78,33 @@ public class ItemPostgres implements ItemDao{
 		}
 		return items;
 	}
+	
+	public List<Item> getItemsCusView() {
+		List<Item> cusItems = new ArrayList<>();
+		
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
+			String sql = "select item_id, item_name, item_description,item_sold from items where item_sold = false";
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				int itemId = rs.getInt("item_id");
+				String name = rs.getString("item_name");
+				String itemDescription = rs.getString("item_description");
+				boolean itemSold = rs.getBoolean("item_sold");
+				
+				Item item = new Item (itemId, name, itemDescription, itemSold);
+				cusItems.add(item);
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cusItems;
+	}
+	
 	@Override
 	public int addItem(Item item) {
 		int id = -1;
