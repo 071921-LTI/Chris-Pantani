@@ -31,6 +31,7 @@ public class EmployeePostgres implements EmployeeDao {
 				String username = rs.getString("empl_username");
 				String password = rs.getString("empl_password");
 				String email = rs.getString("empl_email");
+				
 				emp = new Employee(empId, first_name, last_name, username, password, email);
 			}
 			
@@ -157,6 +158,33 @@ public class EmployeePostgres implements EmployeeDao {
 				String password = rs.getString("empl_password");
 				String emp_email = rs.getString("empl_email");
 				emp = new Employee(empId, first_name, last_name, username, password, emp_email);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return emp;
+	}
+
+	@Override
+	public Employee getEmployeeByUsername(String username) {
+		String sql = "select * from employees where empl_username = ?";
+		Employee emp = null;
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, username);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				int empId = rs.getInt("empl_id");
+				String first_name = rs.getString("empl_first_name");
+				String last_name = rs.getString("empl_last_name");
+				String empUsername = rs.getString("empl_username");
+				String password = rs.getString("empl_password");
+				String emp_email = rs.getString("empl_email");
+				emp = new Employee(empId, first_name, last_name, empUsername, password, emp_email);
 			}
 			
 		} catch (SQLException e) {
