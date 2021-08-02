@@ -134,7 +134,7 @@ public class ItemPostgres implements ItemDao{
 		
 	@Override
 	public boolean updateItem(Item item) {
-		String sql = " update items set item_name = ?, price_offered = ?, payment_made = ?,  offer_pending = ?, item_description = ?, item_sold= ? , employee = ?, customer = ?,  where item_id = ?";
+		String sql = " update items set item_name = ?, price_offered = ?, payment_made = ?,  offer_pending = ?, item_description = ?, item_sold= ? , employee = ?, customer = ?  where item_id = ?";
 		int rowsChanged = -1;
 		
 		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
@@ -147,6 +147,7 @@ public class ItemPostgres implements ItemDao{
 			ps.setBoolean(6, item.isItemSold());
 			ps.setInt(7, item.getEmployee().getId());
 			ps.setInt(8, item.getCustomer().getId());
+			ps.setInt(9, item.getId());
 			
 			rowsChanged = ps.executeUpdate();
 ;		} catch (SQLException e) {

@@ -44,7 +44,7 @@ public class CustomerScreen {
 				double offer;
 				System.out.println("enter the id number of the item you wish to bid on");
 				itemSelect = sc.nextInt();
-				curItem = new Item(itemSelect);
+				curItem = id.getItemByID(itemSelect);
 				int itemId = curItem.getId();
 				System.out.println("input your offer for selected item");
 				offer = sc.nextDouble();
@@ -54,6 +54,12 @@ public class CustomerScreen {
 				o.setPrice_offered(offer);
 				
 				od.addOffer(o);
+				
+//				i = id.getItemByID(itemId);
+				curItem.setOfferPending(true);
+				
+				id.updateItem(curItem);
+				
 				
 				break;
 			case "2":
