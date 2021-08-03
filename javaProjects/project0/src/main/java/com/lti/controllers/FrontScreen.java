@@ -6,8 +6,6 @@ import com.lti.daos.CustomerDao;
 import com.lti.daos.CustomerPostgres;
 import com.lti.daos.EmployeeDao;
 import com.lti.daos.EmployeePostgres;
-import com.lti.exceptions.AuthException;
-import com.lti.exceptions.UserNotFoundException;
 import com.lti.models.Customer;
 import com.lti.models.Employee;
 import com.lti.services.AuthService;
@@ -20,6 +18,7 @@ public class FrontScreen {
 	public static AuthService as = new AuthServiceImpl();
 	public static Employee currentEmp = new Employee();
 	public static Customer currentCus = new Customer();
+	public static Customer newCus = new Customer();
 	
 	static Scanner sc = new Scanner(System.in);
 	
@@ -35,7 +34,29 @@ public class FrontScreen {
 				System.out.println("Enter \n1 to Register \n2 to Login \n3 to exit");
 				input2 = sc.nextLine();
 				switch(input2) {
-				case "1":
+				case "1": //register new customer
+					System.out.println("Enter first name:");
+					String firstName = sc.nextLine();
+					newCus.setFirst_name(firstName);
+					
+					System.out.println("Enter last name:");
+					String lastName = sc.nextLine();
+					newCus.setLast_name(lastName);
+					
+					
+					System.out.println("Enter username:");
+					String username = sc.nextLine();
+					newCus.setUsername(username);
+					
+					System.out.println("Enter password:");
+					String password = sc.nextLine();
+					newCus.setPassword(password);
+					
+					System.out.println("Enter email:");
+					String email = sc.nextLine();
+					newCus.setEmail(email);
+					
+					cd.addCustomer(newCus);	
 					
 					break;
 					

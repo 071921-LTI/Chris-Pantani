@@ -8,7 +8,7 @@ import com.lti.daos.EmployeeDao;
 import com.lti.daos.EmployeePostgres;
 import com.lti.daos.ItemDao;
 import com.lti.daos.ItemPostgres;
-import com.lti.exceptions.AuthException;
+import com.lti.models.Customer;
 import com.lti.models.Employee;
 import com.lti.services.AuthService;
 import com.lti.services.AuthServiceImpl;
@@ -22,11 +22,14 @@ public class Driver {
 		AuthService as = new AuthServiceImpl();
 		CustomerDao cd = new CustomerPostgres();
 		ItemDao id = new ItemPostgres();
+		//Customer cus = cd.getCustomerByID(2);
+
 		
 		FrontScreen.display();
 		//System.out.println(id.getItemsCusView());
 		
 //		System.out.println(cd.getCustomerByUsername("testCus"));
+//		System.out.println(id.ownedItems(cus));
 		
 //		String username = "cpantani";
 //		String password = "password";

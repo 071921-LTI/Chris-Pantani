@@ -106,6 +106,7 @@ public class CustomerPostgres implements CustomerDao {
 			ps.setString(3, customer.getFirst_name());
 			ps.setString(4, customer.getLast_name());
 			ps.setString(5, customer.getEmail());
+			ps.setInt(6, customer.getId());
 			
 			rowsChanged = ps.executeUpdate();
 ;		} catch (SQLException e) {

@@ -108,6 +108,7 @@ public class EmployeePostgres implements EmployeeDao {
 			ps.setString(3, employee.getFirst_name());
 			ps.setString(4, employee.getLast_name());
 			ps.setString(5, employee.getEmail());
+			ps.setInt(6, employee.getId());
 			
 			rowsChanged = ps.executeUpdate();
 ;		} catch (SQLException e) {

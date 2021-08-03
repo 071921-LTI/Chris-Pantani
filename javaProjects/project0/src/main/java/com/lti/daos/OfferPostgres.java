@@ -66,6 +66,33 @@ public class OfferPostgres implements OfferDao {
 		}
 		return offers;
 	}
+	
+	@Override
+	public List<Offer> getOffersItems() {
+		List<Offer> offers = new ArrayList<>();
+		
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
+			String sql = "select * from offers join item";
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				int offerId = rs.getInt("offer_id");
+				int itemId = rs.getInt("item");
+				int customerId = rs.getInt("customer");
+				double priceOffered = rs.getDouble("price_offered");
+				
+				Offer offer = new Offer ( offerId, new Item (itemId) , new Customer(customerId) ,priceOffered);
+				offers.add(offer);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return offers;
+	}
+
 
 	@Override
 	public int addOffer(Offer offer) {
@@ -102,6 +129,7 @@ public class OfferPostgres implements OfferDao {
 			ps.setInt(1, offer.getItem().getId());
 			ps.setInt(2,  offer.getCustomer().getId());
 			ps.setDouble(3, offer.getPrice_offered());
+			ps.setInt(4, offer.getId());
 			
 			rowsChanged = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -205,5 +233,6 @@ public class OfferPostgres implements OfferDao {
 		}
 		return offer;
 	}
+
 
 }

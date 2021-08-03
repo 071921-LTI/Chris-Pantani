@@ -63,9 +63,13 @@ public class CustomerScreen {
 				
 				break;
 			case "2":
+				System.out.println("these are your owned items");
+				System.out.println(id.getItemByCustomerId(cusId));
 				
 				break;
 			case "3":
+				
+				
 				System.out.println("works");
 				
 				break;

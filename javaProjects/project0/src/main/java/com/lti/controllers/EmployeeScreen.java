@@ -8,15 +8,19 @@ import com.lti.daos.EmployeeDao;
 import com.lti.daos.EmployeePostgres;
 import com.lti.daos.ItemDao;
 import com.lti.daos.ItemPostgres;
+import com.lti.daos.OfferDao;
+import com.lti.daos.OfferPostgres;
 import com.lti.models.Customer;
 import com.lti.models.Employee;
 import com.lti.models.Item;
+import com.lti.models.Offer;
 
 public class EmployeeScreen {
 
 	static Scanner sc = new Scanner(System.in);
 	static Employee e = new Employee();
 	static Customer c = new Customer();
+	static Offer o = new Offer();
 	static Item i = new Item();
 	
 	public static void display(Employee persistedEmp) {
@@ -24,18 +28,20 @@ public class EmployeeScreen {
 		EmployeeDao ed = new EmployeePostgres();
 		CustomerDao cd = new CustomerPostgres();
 		ItemDao id = new ItemPostgres();
+		OfferDao od = new OfferPostgres();
+		
 		 
 		String input;
 		do {
-			System.out.println("Enter \n1 to add item \n2 to view pending offers \n3 to remove items \n4 to view all payments \n5 add new employee");
+			System.out.println("Enter \n1 to add item \n2 to view pending and except offers \n3 to remove items \n4 to view all payments \n5 add new employee");
 			input = sc.nextLine();
 			switch(input) {
 			case "1":
 				
 				//Item i = new Item();
 				
-				e = ed.getEmployeeByID(1); //add getID to this
-				c = cd.getCustomerByID(1);//add get id for customer
+				e = currentEmp; //add getID to this
+				c = null;//add get id for customer
 				
 				System.out.println("Enter name of item");
 				String itemName = sc.nextLine();
@@ -67,11 +73,39 @@ public class EmployeeScreen {
 				break;
 			
 			case "2":
+				System.out.println(od.getOfferes());
 				
+				System.out.println("enter the offer id of the offer you wish to accept");
+				int offerAccept = sc.nextInt();
+				int itemId = od.getOfferByID(offerAccept).getItem().getId();
+				int cusId = od.getOfferByID(offerAccept).getCustomer().getId();
+				double price = od.getOfferByID(offerAccept).getPrice_offered();
+				Item selectedItem = id.getItemByID(itemId);
+				Customer selectedCuz = cd.getCustomerByID(cusId);
+				
+				selectedItem.setItemSold(true);
+				selectedItem.setCustomer(selectedCuz);
+				selectedItem.setOfferPending(false);
+				selectedItem.setPriceOffered(price);
+				
+				id.updateItem(selectedItem);
+				
+				input = "6";
+				
+				break;
 			case "3":
+				
+				System.out.println(id.getItems());
+				System.out.println("Select the item id that you wish to delete");
+				int itemDel = sc.nextInt();
+				id.deleteItem(itemDel);
+				input = "6";
+				
+				break;
 			
 			case "4":
 				
+				break;
 			case "5":
 				//Employee e = new Employee();
 				

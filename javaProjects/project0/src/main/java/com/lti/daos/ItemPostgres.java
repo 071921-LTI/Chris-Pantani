@@ -46,6 +46,39 @@ public class ItemPostgres implements ItemDao{
 		}
 		return item;
 	}
+	
+	
+	@Override
+	public Item getItemByCustomerId(int id) {
+		String sql = "select * from items where customer = ?";
+		Item item = null;
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id); //1 refers to the first ? to deal with
+			
+			ResultSet rs = ps.executeQuery();
+
+			if(rs.next()) {
+				int itemId = rs.getInt("item_id");
+				String name = rs.getString("item_name");
+				double priceOffered = rs.getDouble("price_offered");
+				double paymentMade = rs.getDouble("payment_made");
+				boolean offerPending = rs.getBoolean("offer_pending");
+				String itemDescription = rs.getString("item_description");
+				boolean itemSold = rs.getBoolean("item_sold");
+				int empId = rs.getInt("employee");
+				int cusId = rs.getInt("customer");
+
+				
+				item = new Item (itemId, name, priceOffered, paymentMade, offerPending, itemDescription, itemSold, new Employee(empId) ,new Customer(cusId));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
+	}
 
 	@Override
 	public List<Item> getItems() {
@@ -83,7 +116,7 @@ public class ItemPostgres implements ItemDao{
 		List<Item> cusItems = new ArrayList<>();
 		
 		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
-			String sql = "select item_id, item_name, item_description,item_sold from items where item_sold = false";
+			String sql = "select item_id, item_name, item_description, item_sold from items where item_sold = false";
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(sql);
 			
@@ -93,8 +126,8 @@ public class ItemPostgres implements ItemDao{
 				String itemDescription = rs.getString("item_description");
 				boolean itemSold = rs.getBoolean("item_sold");
 				
-				Item item = new Item (itemId, name, itemDescription, itemSold);
-				cusItems.add(item);
+				Item it = new Item (itemId, name, itemDescription, itemSold);
+				cusItems.add(it);
 				}
 			
 			
@@ -179,5 +212,42 @@ public class ItemPostgres implements ItemDao{
 		
 		return rowsChanged;	
 	}
+
+
+	@Override
+	public List<Item> ownedItems(Customer cus) {
+		int cus_id = cus.getId();
+		List<Item> ownedItems = new ArrayList<>();
+		
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
+			String sql = "select item_id, item_name, item_description, price_offered, payment_made, item_sold from items where customer = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, cus_id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int itemId = rs.getInt("item_id");
+				String name = rs.getString("item_name");
+				double priceOffered = rs.getDouble("price_offered");
+				double paymentMade = rs.getDouble("payment_made");
+				//boolean offerPending = rs.getBoolean("offer_pending");
+				String itemDescription = rs.getString("item_description");
+				boolean itemSold = rs.getBoolean("item_sold");
+				//int empId = rs.getInt("employee");
+				//int cusId = rs.getInt("customer");
+				
+				Item item = new Item (itemId, name,itemDescription, itemSold, priceOffered, paymentMade);   // new Employee(empId) ,new Customer(cusId));
+				ownedItems.add(item);
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ownedItems;
+	}
+
 
 }

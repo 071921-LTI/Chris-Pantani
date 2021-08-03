@@ -1,7 +1,6 @@
 package com.lti.services;
 
 import com.lti.exceptions.AuthException;
-import com.lti.exceptions.UserNotFoundException;
 import com.lti.models.Customer;
 import com.lti.models.Employee;
 import com.lti.services.AuthService;
