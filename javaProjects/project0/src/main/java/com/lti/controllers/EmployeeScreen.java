@@ -33,7 +33,7 @@ public class EmployeeScreen {
 		 
 		String input;
 		do {
-			System.out.println("Enter \n1 to add item \n2 to view pending and except offers \n3 to remove items \n4 to view all payments \n5 add new employee");
+			System.out.println("Enter \n1 to add item \n2 to view pending and accept offers \n3 to remove items \n4 to view all payments \n5 add new employee \n6 to retrun to main screen");
 			input = sc.nextLine();
 			switch(input) {
 			case "1":
@@ -69,7 +69,7 @@ public class EmployeeScreen {
 				
 				
 				
-				input = "6";
+				input = "10";
 				break;
 			
 			case "2":
@@ -90,7 +90,9 @@ public class EmployeeScreen {
 				
 				id.updateItem(selectedItem);
 				
-				input = "6";
+				od.deleteOfferByItem(itemId);
+				
+				input = "10";
 				
 				break;
 			case "3":
@@ -99,11 +101,14 @@ public class EmployeeScreen {
 				System.out.println("Select the item id that you wish to delete");
 				int itemDel = sc.nextInt();
 				id.deleteItem(itemDel);
-				input = "6";
+				input = "10";
 				
 				break;
 			
 			case "4":
+				System.out.println("here is a list of all sold items and payments");
+				System.out.println(id.soldItems());
+				input = "10";
 				
 				break;
 			case "5":
@@ -134,10 +139,13 @@ public class EmployeeScreen {
 //				System.out.println("the generated id is: " + genId);
 //				System.out.println(ed.getEmployeeByID(genId));
 				
-				input = "6";
+				input = "10";
 				break;
+				
+			case "6":
+				FrontScreen.display();
 			}
-		}while(!input.equals("6"));
+		}while(!input.equals("10"));
 	}
 }
 	

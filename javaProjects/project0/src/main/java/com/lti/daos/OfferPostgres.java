@@ -162,7 +162,6 @@ public class OfferPostgres implements OfferDao {
 		return rowsChanged;
 	}
 
-
 	@Override
 	public int deleteOfferByItem(int id) {
 		String sql = "delete from offers where item = ?;";

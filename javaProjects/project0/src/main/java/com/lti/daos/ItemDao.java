@@ -11,6 +11,8 @@ public interface ItemDao {
 	public abstract List<Item> getItems();
 	public abstract List<Item> getItemsCusView();
 	public abstract List<Item> ownedItems(Customer cus);
+	public abstract List<Item> paymentsItem(Customer cus);
+	public abstract List<Item> soldItems();
 	public abstract int addItem(Item item);
 	public abstract boolean updateItem(Item item);
 	public abstract int deleteItem(int id);

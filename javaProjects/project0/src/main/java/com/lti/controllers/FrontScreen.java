@@ -74,9 +74,8 @@ public class FrontScreen {
 						if(persistedCus.getPassword().equals(cusPassword)) {
 							int cusId = persistedCus.getId();
 							currentCus = new Customer(cusId);
-							System.out.println("it works");
 							CustomerScreen.display(persistedCus);
-							input = "3";
+							input2 = "10";
 							break;
 						}else {
 							System.out.println("wrong password");
@@ -85,10 +84,12 @@ public class FrontScreen {
 					break;
 					
 				case "3":
+					input2= "10";
 					display();
 					
+					
 				}
-				} while(input2 != "4");
+				} while(input2 != "10");
 				
 				
 				
@@ -109,7 +110,7 @@ public class FrontScreen {
 						currentEmp = new Employee(empId);
 						System.out.println("it works");
 						EmployeeScreen.display(persistedEmp);
-						input = "3";
+						input = "10";
 						break;
 					}else {
 						System.out.println("wrong password");
@@ -119,12 +120,13 @@ public class FrontScreen {
 				break;
 				
 			case "3":
+				System.exit(0);
 				
 			}
 			
 			
 			
-		}while(!input.equals("3"));
+		}while(!input.equals("10"));
 	
 		}
 	}

@@ -250,4 +250,70 @@ public class ItemPostgres implements ItemDao{
 	}
 
 
+	@Override
+	public List<Item> paymentsItem(Customer cus) {
+		int cus_id = cus.getId();
+		List<Item> payments = new ArrayList<>();
+		
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
+			String sql = "select item_id, item_name, price_offered, payment_made from items where customer = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, cus_id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int itemId = rs.getInt("item_id");
+				String name = rs.getString("item_name");
+				double priceOffered = rs.getDouble("price_offered");
+				double paymentMade = rs.getDouble("payment_made");
+				//boolean offerPending = rs.getBoolean("offer_pending");
+				//String itemDescription = rs.getString("item_description");
+				//boolean itemSold = rs.getBoolean("item_sold");
+				//int empId = rs.getInt("employee");
+				//int cusId = rs.getInt("customer");
+				
+				Item item = new Item (itemId, name, priceOffered, paymentMade);   // new Employee(empId) ,new Customer(cusId));
+				payments.add(item);
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return payments;
+	}
+
+
+	@Override
+	public List<Item> soldItems() {
+		List<Item> soldItems = new ArrayList<>();
+		
+		try(Connection con = ConnectionUtil.getConnectionFromEnv()){
+			String sql = "select item_id, item_name, item_sold, price_offered, payment_made, customer from items where item_sold = true";
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				int itemId = rs.getInt("item_id");
+				String name = rs.getString("item_name");
+				boolean itemSold = rs.getBoolean("item_sold");
+				double priceOffered = rs.getDouble("price_offered");
+				double paymentMade = rs.getDouble("payment_made");
+				int cusId = rs.getInt("customer");
+				
+				Item sold = new Item (itemId, name, itemSold, priceOffered, paymentMade, new Customer(cusId));
+				soldItems.add(sold);
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return soldItems;
+	}
+
+
 }

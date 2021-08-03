@@ -28,8 +28,9 @@ public class AuthServiceImpl implements AuthService{
 			int empId = persistedEmp.getId();
 			currentEmp = new Employee(empId);
 			return currentEmp;
+		}else {
+			throw new AuthException();
 		}
-		return currentEmp;
 	}
 
 	@Override
