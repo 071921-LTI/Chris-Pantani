@@ -1,27 +1,60 @@
 package com.lti;
 
-import com.lti.controllers.LoginScreen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.lti.controllers.EmployeeScreen;
+import com.lti.controllers.FrontScreen;
+import com.lti.daos.CustomerDao;
+import com.lti.daos.CustomerPostgres;
 import com.lti.daos.EmployeeDao;
 import com.lti.daos.EmployeePostgres;
+import com.lti.daos.ItemDao;
+import com.lti.daos.ItemPostgres;
+import com.lti.models.Customer;
 import com.lti.models.Employee;
+import com.lti.services.AuthService;
+import com.lti.services.AuthServiceImpl;
 
 public class Driver {
 	
 	public static void main(String[] args) {
-		//LoginScreen.displayLogin();
+		
 		
 		EmployeeDao ed = new EmployeePostgres();
+		AuthService as = new AuthServiceImpl();
+		CustomerDao cd = new CustomerPostgres();
+		ItemDao id = new ItemPostgres();
+		//Customer cus = cd.getCustomerByID(2);
+
 		
-		Employee e = new Employee();
-		e.setFirst_name("test_first_name");
-		e.setLast_name("test_last_name");
-		e.setEmail("test@test.com");
-		e.setUsername("test_username");
-		e.setPassword("testpass");
+		FrontScreen.display();
+		//System.out.println(id.getItemsCusView());
 		
-		int genId = ed.addEmployee(e);
-		System.out.println("the generated id is: " + genId);
-		System.out.println(ed.getEmployeeByID(genId));
+//		System.out.println(cd.getCustomerByUsername("testCus"));
+//		System.out.println(id.ownedItems(cus));
+		
+//		String username = "cpantani";
+//		String password = "password";
+//		try {
+//			if(as.empLogin(username, password)!= null);
+//			System.out.println("log in works");
+//		} catch (AuthException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		//Employee e = new Employee();
+//		e.setFirst_name("test_first_name2");
+//		e.setLast_name("test_last_name2");
+//		e.setEmail("test@test.com2");
+//		e.setUsername("test_username2");
+//		e.setPassword("testpass2");
+//		
+//		int genId = ed.addEmployee(e);
+//		System.out.println("the generated id is: " + genId);
+//		System.out.println(ed.getEmployeeByID(genId));
+		//System.out.println(ed.getEmployeeByUsername("cpantani").getId());
 	}
 
 }

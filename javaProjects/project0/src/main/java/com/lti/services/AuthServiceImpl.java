@@ -1,32 +1,48 @@
 package com.lti.services;
 
-import com.lti.daos.UserDao;
-import com.lti.daos.UserFile;
 import com.lti.exceptions.AuthException;
-import com.lti.models.User;
-import com.lti.exceptions.UserNotFoundException;
+import com.lti.models.Customer;
+import com.lti.models.Employee;
+import com.lti.services.AuthService;
+import com.lti.uitl.ConnectionUtil;
 
-public class AuthServiceImpl implements AuthService {
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.lti.daos.CustomerDao;
+import com.lti.daos.CustomerPostgres;
+import com.lti.daos.EmployeeDao;
+import com.lti.daos.EmployeePostgres;
+import com.lti.models.Employee;
+
+public class AuthServiceImpl implements AuthService{
 	
-	private UserDao ud = new UserFile();
-
+	private EmployeeDao ed = new EmployeePostgres();
+	private CustomerDao cd = new CustomerPostgres();
+	
 	@Override
-	public boolean login(User user) throws AuthException {
-
-
-		try {
-			User activeUser = ud.getUser(user.getUsername());
-			if (activeUser.getPassword().equals(user.getPassword())){
-				return true;
-			} else {
-				return false;
-			}
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public Employee empLogin(String username, String password) throws AuthException {
+		Employee currentEmp = null;
+		Employee persistedEmp = ed.getEmployeeByUsername(username);
+		if(persistedEmp.getPassword().equals(password)) {
+			int empId = persistedEmp.getId();
+			currentEmp = new Employee(empId);
+			return currentEmp;
+		}else {
+			throw new AuthException();
 		}
-		
-		return false;
 	}
 
+	@Override
+	public Customer cusLogin(String username, String password) throws AuthException {
+		Customer currentcus = null;
+
+		Customer persistedCus = cd.getCustomerByUsername(username);
+		if(persistedCus.getPassword().equals(password)) {
+			int cusId = persistedCus.getId();
+			persistedCus = new Customer(cusId);
+			return currentcus;
+		} 
+		return null;
+	}
 }
