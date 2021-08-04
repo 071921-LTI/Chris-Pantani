@@ -152,7 +152,7 @@ public class ItemPostgres implements ItemDao{
 			ps.setString(5, item.getItemDescription());
 			ps.setBoolean(6, item.isItemSold());
 			ps.setInt(7, item.getEmployee().getId());
-			ps.setInt(8, item.getCustomer().getId());
+			ps.setInt(8, 1);
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {

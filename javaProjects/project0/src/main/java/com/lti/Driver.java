@@ -1,5 +1,8 @@
 package com.lti;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.lti.controllers.EmployeeScreen;
 import com.lti.controllers.FrontScreen;
 import com.lti.daos.CustomerDao;

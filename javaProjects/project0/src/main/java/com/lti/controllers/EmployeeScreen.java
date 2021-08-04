@@ -22,13 +22,17 @@ public class EmployeeScreen {
 	static Customer c = new Customer();
 	static Offer o = new Offer();
 	static Item i = new Item();
+
 	
 	public static void display(Employee persistedEmp) {
+		
+		
 		Employee currentEmp = persistedEmp;
 		EmployeeDao ed = new EmployeePostgres();
 		CustomerDao cd = new CustomerPostgres();
 		ItemDao id = new ItemPostgres();
 		OfferDao od = new OfferPostgres();
+		
 		
 		 
 		String input;
@@ -135,9 +139,9 @@ public class EmployeeScreen {
 				String email = sc.nextLine();
 				e.setEmail(email);
 				
-//				int genId = ed.addEmployee(e);
-//				System.out.println("the generated id is: " + genId);
-//				System.out.println(ed.getEmployeeByID(genId));
+				ed.addEmployee(e);
+
+				
 				
 				input = "10";
 				break;
