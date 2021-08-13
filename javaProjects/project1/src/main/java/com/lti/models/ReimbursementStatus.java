@@ -35,6 +35,11 @@ public class ReimbursementStatus {
 		this.statusId = statusId;
 		this.status = status;
 	}
+	
+	public ReimbursementStatus(String status) {
+		super();
+		this.status = status;
+	}
 
 
 

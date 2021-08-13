@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,16 +39,17 @@ public class User {
 	@Column
 	private String email;
 	
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name="role_id")
-	private int roleId;
+	private UserRole ur;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int id, String username, String passwrod, String firstName, String lastName, String email, int roleId) {
+	public User(int id, String username, String passwrod, String firstName, String lastName, String email,
+			UserRole ur) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -54,7 +57,24 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.roleId = roleId;
+		this.ur = ur;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	public User(String username, String passwrod, String firstName, String lastName, String email, UserRole ur) {
+		super();
+		this.username = username;
+		this.passwrod = passwrod;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.ur = ur;
 	}
 
 	public int getId() {
@@ -105,12 +125,12 @@ public class User {
 		this.email = email;
 	}
 
-	public int getRoleId() {
-		return roleId;
+	public UserRole getUr() {
+		return ur;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setUr(UserRole ur) {
+		this.ur = ur;
 	}
 
 	@Override
@@ -122,11 +142,14 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((passwrod == null) ? 0 : passwrod.hashCode());
-		result = prime * result + roleId;
+		result = prime * result + ((ur == null) ? 0 : ur.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
+	
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -158,7 +181,10 @@ public class User {
 				return false;
 		} else if (!passwrod.equals(other.passwrod))
 			return false;
-		if (roleId != other.roleId)
+		if (ur == null) {
+			if (other.ur != null)
+				return false;
+		} else if (!ur.equals(other.ur))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -171,10 +197,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", passwrod=" + passwrod + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", roleId=" + roleId + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", ur=" + ur + "]";
 	}
-	
-	
-	
 
+	
 }

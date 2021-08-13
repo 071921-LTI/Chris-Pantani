@@ -18,11 +18,11 @@
 		<!-- <property name="hibernate.default_schema"></property> -->
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		
-		<mapping class="com.revature.models.User"></mapping>
-		<mapping class="com.revature.models.UserRole"></mapping>
-		<mapping class="com.revature.models.Reimbursement"></mapping>
-		<mapping class="com.revature.models.ReimbursementStatus"></mapping>
-		<mapping class="com.revature.models.ReimbursementType"></mapping>
+		<mapping class="com.lti.models.User"></mapping>
+		<mapping class="com.lti.models.UserRole"></mapping>
+		<mapping class="com.lti.models.Reimbursement"></mapping>
+		<mapping class="com.lti.models.ReimbursementStatus"></mapping>
+		<mapping class="com.lti.models.ReimbursementType"></mapping>
 
     </session-factory>
 

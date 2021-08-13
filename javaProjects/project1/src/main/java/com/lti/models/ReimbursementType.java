@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="reimursement_types")
-public class ReimursementType {
+public class ReimbursementType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rt_id")
@@ -18,14 +18,19 @@ public class ReimursementType {
 	@Column
 	private String type;
 
-	public ReimursementType() {
+	public ReimbursementType() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReimursementType(int typeId, String type) {
+	public ReimbursementType(int typeId, String type) {
 		super();
 		this.typeId = typeId;
+		this.type = type;
+	}
+	
+	public ReimbursementType(String type) {
+		super();
 		this.type = type;
 	}
 
@@ -62,7 +67,7 @@ public class ReimursementType {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReimursementType other = (ReimursementType) obj;
+		ReimbursementType other = (ReimbursementType) obj;
 		if (type == null) {
 			if (other.type != null)
 				return false;

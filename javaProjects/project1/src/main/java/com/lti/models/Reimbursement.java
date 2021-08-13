@@ -34,28 +34,28 @@ public class Reimbursement {
 	
 	
 	@OneToOne
-    @JoinColumn(name="u_id")
-	private int author;
+    @JoinColumn(name="author")
+	private User author;
 	
 	@OneToOne
-    @JoinColumn(name="u_id")
-	private int resolver;
+    @JoinColumn(name="resolver")
+	private User resolver;
 	
 	@OneToOne
     @JoinColumn(name="rs_id")
-	private int statusId;
+	private ReimbursementStatus status;
 	
 	@OneToOne
     @JoinColumn(name="rt_id")
-	private int typeId;
+	private ReimbursementType type;
 
 	public Reimbursement() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reimbursement(int id, int amount, Timestamp submitted, Timestamp resolved, String description,
-			int author, int resolver, int statusId, int typeId) {
+	public Reimbursement(int id, int amount, Timestamp submitted, Timestamp resolved, String description, User author,
+			User resolver, ReimbursementStatus status, ReimbursementType type) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -64,8 +64,21 @@ public class Reimbursement {
 		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
-		this.statusId = statusId;
-		this.typeId = typeId;
+		this.status = status;
+		this.type = type;
+	}
+
+	public Reimbursement(int amount, Timestamp submitted, Timestamp resolved, String description, User author,
+			User resolver, ReimbursementStatus status, ReimbursementType type) {
+		super();
+		this.amount = amount;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.description = description;
+		this.author = author;
+		this.resolver = resolver;
+		this.status = status;
+		this.type = type;
 	}
 
 	public int getId() {
@@ -108,37 +121,36 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-
-	public int getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
-	public int getResolver() {
+	public User getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(int resolver) {
+	public void setResolver(User resolver) {
 		this.resolver = resolver;
 	}
 
-	public int getStatusId() {
-		return statusId;
+	public ReimbursementStatus getStatus() {
+		return status;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setStatus(ReimbursementStatus status) {
+		this.status = status;
 	}
 
-	public int getTypeId() {
-		return typeId;
+	public ReimbursementType getType() {
+		return type;
 	}
 
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
+	public void setType(ReimbursementType type) {
+		this.type = type;
 	}
 
 	@Override
@@ -146,14 +158,14 @@ public class Reimbursement {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
-		result = prime * result + author;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
-		result = prime * result + resolver;
-		result = prime * result + statusId;
+		result = prime * result + ((resolver == null) ? 0 : resolver.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
-		result = prime * result + typeId;
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -168,7 +180,10 @@ public class Reimbursement {
 		Reimbursement other = (Reimbursement) obj;
 		if (amount != other.amount)
 			return false;
-		if (author != other.author)
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -182,16 +197,25 @@ public class Reimbursement {
 				return false;
 		} else if (!resolved.equals(other.resolved))
 			return false;
-		if (resolver != other.resolver)
+		if (resolver == null) {
+			if (other.resolver != null)
+				return false;
+		} else if (!resolver.equals(other.resolver))
 			return false;
-		if (statusId != other.statusId)
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		if (submitted == null) {
 			if (other.submitted != null)
 				return false;
 		} else if (!submitted.equals(other.submitted))
 			return false;
-		if (typeId != other.typeId)
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
@@ -199,9 +223,10 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", description=" + description + ", author=" + author + ", resolver="
-				+ resolver + ", statusId=" + statusId + ", typeId=" + typeId + "]";
+				+ ", description=" + description + ", author=" + author + ", resolver=" + resolver + ", status="
+				+ status + ", type=" + type + "]";
 	}
 	
 	
+
 }

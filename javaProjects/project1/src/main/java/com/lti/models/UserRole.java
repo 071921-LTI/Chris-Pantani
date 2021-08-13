@@ -10,9 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_roles")
 public class UserRole {
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_id")
 	private int id;
 	
