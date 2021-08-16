@@ -2,6 +2,8 @@ package com.lti.dao;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -22,7 +24,10 @@ public class UserHibernate implements UserDao{
 	public User getUserByUsername(String username) throws UserNotFoundException {
 		User u = null;
 		try(Session s = HibernateUtil.getSessionFactory().openSession()){
-			u = s.get(User.class, username);
+			String hql = "from User where username = :username";
+			TypedQuery<User> nq = s.createQuery(hql, User.class);
+			nq.setParameter("username", username);
+			u = nq.getSingleResult();
 		}
 		return u;
 	}

@@ -28,7 +28,7 @@ public class User {
 	private String username;
 	
 	@Column(nullable = false)
-	private String passwrod;
+	private String password;
 	
 	@Column
 	private String firstName;
@@ -53,7 +53,7 @@ public class User {
 		super();
 		this.id = id;
 		this.username = username;
-		this.passwrod = passwrod;
+		this.password = passwrod;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -70,7 +70,7 @@ public class User {
 	public User(String username, String passwrod, String firstName, String lastName, String email, UserRole ur) {
 		super();
 		this.username = username;
-		this.passwrod = passwrod;
+		this.password = passwrod;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -93,12 +93,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPasswrod() {
-		return passwrod;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswrod(String passwrod) {
-		this.passwrod = passwrod;
+	public void setPassword(String passwrod) {
+		this.password = passwrod;
 	}
 
 	public String getFirstName() {
@@ -141,7 +141,7 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((passwrod == null) ? 0 : passwrod.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((ur == null) ? 0 : ur.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -176,10 +176,10 @@ public class User {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (passwrod == null) {
-			if (other.passwrod != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!passwrod.equals(other.passwrod))
+		} else if (!password.equals(other.password))
 			return false;
 		if (ur == null) {
 			if (other.ur != null)
@@ -196,7 +196,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", passwrod=" + passwrod + ", firstName=" + firstName
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", email=" + email + ", ur=" + ur + "]";
 	}
 
