@@ -2,10 +2,13 @@ package com.lti.dao;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.lti.models.ReimbursementType;
+import com.lti.models.User;
 import com.lti.models.UserRole;
 import com.lti.util.HibernateUtil;
 
@@ -24,7 +27,10 @@ public class ReimbursementTypeHibernate implements ReimbursementTypeDao {
 	public ReimbursementType getReimbursementTypeByType(String type) {
 		ReimbursementType rt = null;
 		try(Session s = HibernateUtil.getSessionFactory().openSession()){
-			rt = s.get(ReimbursementType.class, type);
+			String hql = ("from ReimbursementType where type = :type");
+			TypedQuery<ReimbursementType> nq = s.createQuery(hql, ReimbursementType.class);
+			nq.setParameter("type", type);
+			rt = nq.getSingleResult();
 		}
 		return rt;
 	}

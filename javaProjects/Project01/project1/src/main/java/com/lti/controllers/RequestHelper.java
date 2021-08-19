@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lti.delegates.AuthDelegate;
+import com.lti.delegates.ReimbursementDelegate;
 import com.lti.delegates.UserDelegate;
 
 public class RequestHelper {
 	
 	private UserDelegate ud = new UserDelegate();
 	private AuthDelegate ad = new AuthDelegate();
+	private ReimbursementDelegate rd = new ReimbursementDelegate();
 	
 	public void process(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException {
 		
@@ -36,8 +38,10 @@ public class RequestHelper {
 				
 				break;
 			case "reimbursements":
+				rd.process(rq, rs);
 				
 				break;
+				
 			default:
 				rs.sendError(400, "Path not supported:" + path);
 			}

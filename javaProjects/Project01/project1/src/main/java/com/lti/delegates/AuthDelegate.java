@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.lti.dao.UserRoleDao;
+import com.lti.dao.UserRoleHibernate;
 import com.lti.exceptions.UserNotFoundException;
 import com.lti.models.User;
+import com.lti.models.UserRole;
 import com.lti.services.AuthService;
 import com.lti.services.AuthServiceImpl;
 import com.lti.util.CorsFix;
@@ -17,6 +20,7 @@ import com.lti.util.CorsFix;
 public class AuthDelegate implements Delegatable {
 	
 	AuthService as = new AuthServiceImpl();
+	UserRoleDao urd = new UserRoleHibernate();
 	private static final long serialVersionUID = 1L;
 	
 
@@ -75,7 +79,6 @@ public class AuthDelegate implements Delegatable {
 				if(user != null) {
 //					HttpSession session = rq.getSession();
 //					session.setAttribute("user", username);
-					
 					String token = user.getId() + ":" + user.getUr().getRole();
 					rs.setHeader("Authorization", token);
 					rs.setStatus(200);

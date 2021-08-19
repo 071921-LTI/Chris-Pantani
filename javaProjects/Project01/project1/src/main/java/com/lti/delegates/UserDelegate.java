@@ -10,15 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lti.dao.UserRoleDao;
+import com.lti.dao.UserRoleHibernate;
 import com.lti.delegates.Delegatable;
 import com.lti.services.UserService;
 import com.lti.services.UserServiceImpl;
 import com.lti.exceptions.UserNotFoundException;
 import com.lti.models.User;
+import com.lti.models.UserRole;
 
 public class UserDelegate implements Delegatable{
 	
 	UserService us = new UserServiceImpl();
+	UserRoleDao urd = new UserRoleHibernate();
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -80,15 +84,38 @@ public class UserDelegate implements Delegatable{
 	public void handlePost(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
 		System.out.println("In handlePost");
 		
-		InputStream request = rq.getInputStream();
-
-		User user = new ObjectMapper().readValue(request, User.class);
 		
-		if (!us.addUser(user)) {
+		String username = rq.getParameter("username");
+		String password = rq.getParameter("password");
+		String firstName = rq.getParameter("firstName");
+		String lastName = rq.getParameter("lastName");
+		String email = rq.getParameter("email");
+		
+		System.out.println(username + ":" + password+ ":" +firstName+ ":" +lastName+ ":" +email);
+		
+		UserRole ur = urd.getUserRoleById(3);
+		
+		User u = new User(username, password, firstName, lastName, email, ur);
+		
+		System.out.println(u);
+		
+		if (!us.addUser(u)) {
 			rs.sendError(400, "Unable to add user.");
 		} else {
-			rs.setStatus(201);
+			rs.setStatus(200);
 		}
+		
+		
+		
+//		InputStream request = rq.getInputStream();
+//
+//		User user = new ObjectMapper().readValue(request, User.class);
+//		
+//		if (!us.addUser(user)) {
+//			rs.sendError(400, "Unable to add user.");
+//		} else {
+//			rs.setStatus(201);
+//		}
 
 	}
 

@@ -50,7 +50,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean deleteUser(int id) {
-		@SuppressWarnings("unused")
 		User u;
 		try {
 			u = ud.getUserById(id);
