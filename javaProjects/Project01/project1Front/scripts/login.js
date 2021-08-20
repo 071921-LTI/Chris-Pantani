@@ -1,4 +1,5 @@
 document.getElementById("submitButton").addEventListener("click", login);
+document.getElementById('register').addEventListener('click', register);
 
 function login(){
 
@@ -34,4 +35,8 @@ function login(){
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let requestBody = `username=${username}&password=${password}`;
     xhr.send(requestBody);
+}
+
+function register(){
+    window.location.href="register.html";
 }

@@ -1,4 +1,5 @@
 document.getElementById("submitButton").addEventListener("click", register);
+document.getElementById("login").addEventListener("click", login);
 
 function register(){
 
@@ -26,4 +27,8 @@ function register(){
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let requestBody = `username=${username}&password=${password}&firstName=${firstName}&lastName=${lastName}&email=${email}&ur=${null}`
     xhr.send(requestBody);
+}
+
+function login(){
+    window.location.href="register.html";
 }

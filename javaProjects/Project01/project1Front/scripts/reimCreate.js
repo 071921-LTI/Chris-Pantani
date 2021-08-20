@@ -33,5 +33,5 @@ function createReim(){
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let requestBody = `amount=${amount}&description=${description}&type=${type}`;
     xhr.send(requestBody);
-    window.location.href = "dashboard.html";
+    //window.location.href = "dashboard.html";
 }
