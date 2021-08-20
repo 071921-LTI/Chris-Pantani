@@ -18,18 +18,12 @@ function login(){
             
             let tokArr = authToken.split(":");
             console.log(tokArr[1]);
-
             
-           /* 
              if(tokArr[1] === "Manager"){
-                window.location.href = 'managerPortal.html'
+                window.location.href = 'managerPortal.html';
             } else if(tokArr[1] === "Employee"){
-                window.location.href = 'employeePortal.html'
+                window.location.href = 'employeePortal.html';
             }
-            */
-            
-
-            window.location.href="reimAuthor.html";
 
 
         } else if (ShadowRoot.readyState === 4){

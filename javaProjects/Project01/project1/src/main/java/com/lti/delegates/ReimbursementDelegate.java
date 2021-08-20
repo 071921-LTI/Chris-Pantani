@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.dialect.RDMSOS2200Dialect;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lti.dao.ReimbursementDao;
 import com.lti.dao.ReimbursementHibernate;
@@ -115,7 +117,46 @@ public class ReimbursementDelegate implements Delegatable {
 
 	@Override
 	public void handlePut(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("In handlePut reim");
+		String token = rq.getHeader("Authorization");
+		
+		String[] stringArr = token.split(":");
+		int id = Integer.parseInt(stringArr[0]);
+		String role = stringArr[1];
+		
+		User u = null;
+		
+		String status = rq.getParameter("status");
+		String sId = rq.getParameter("rid");
+		
+
+		
+		System.out.println("the retrieved status is"+ status);
+		System.out.println("the retreived id" +sId);
+		//int rId = Integer.parseInt(sId);
+		
+		
+		/*
+		ReimbursementStatus rbs = rsd.getReimbursementStatusByStatus(status);
+		try {
+			System.out.println("status: "+status+"status id: "+sId+"user: "+u);
+			u = us.getUserById(id);
+			Reimbursement r = res.getReimbursementById(rId);
+			r.setStatus(rbs);
+			r.setResolver(u);
+			r.setResolved(new Timestamp(System.currentTimeMillis()));
+			res.updateReimbursement(r);
+			System.out.println(r);
+			
+		} catch (ReimbursementNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	*/
 		
 	}
 
