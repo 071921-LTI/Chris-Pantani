@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Create Reimbursment</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container align-content-center" id="registerForm">
+			<form>
+				<div class="form-row justify-content-center">
+					<h1 class="display-4">Project1</h1> 
+				</div>
+				<div id="bottomBorder"class="form-row justify-content-center">
+					<h1 class="display-4">Create Rembursment Request</h1> 
+				</div>
+
+				<hr>
+				
+
+				<div class="form-row">
+					<input class="btn btn-info" value="Back" id="back">
+				</div>
+
+				<br>
+
+                <div class="form-row justify-content-center">
+					<label>amount:</label>
+				</div>
+				<div class="form-row justify-content-center">
+					<input class="inputstyle" type="text" name="amount" id="amount">
+				</div>
+				
+                <br> 
+
+                <div class="form-row justify-content-center">
+					<label>description:</label>
+				</div>
+				<div class="form-row justify-content-center">
+					<input class="inputstyle" type="text" name="description" id="description">
+				</div>
+				
+                <br> 
+				
+                <div class="form-row justify-content-center">
+					<label>tpye:</label>
+				</div>
+                
+                <div class="form-row justify-content-center">
+                    <p>enter only "Lodging", "Travel", "Food" and "Other"</p>
+				</div>
+
+				<div class="form-row justify-content-center">
+					<input class="inputstyle" type="text" name="type" id="type">
+				</div>
+				
+                <br> <br>
+				
+                <div class="form-row justify-content-center">
+					<input class="btn btn-primary" value="Create Reimbursment" id="submitButton">
+				</div>
+			</form>
+	</div>
+	<script src="../scripts/reimCreate.js"></script>
+</body>
+</html>
