@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta cahrset = "UTF-8">
-        <title> Request Handler</title>
-    </head>
+        <meta charset="ISO-8859-1">
+        <title>Register Page</title>
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous">
+        <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+            </style>
+        </head>
     <body>
         <div class="form-row justify-content-center">
             <label>request id:</label>
@@ -14,15 +23,40 @@
             <main>
                 <h1> Request Handler</h1>
                 <div style="float:center; text-align:center">
-                    <button id= "approve">approve</button>
-                    <button id = "denied">denied</button>
-                    <button id ="logout">Log Out</button>
+                    <div class="form-row justify-content-center">
+                        <input class="btn btn-success" value="approve" id="approve">
+                        <input class="btn btn-danger" value="denied" id="denied">
+                        
+                    </div>
+
                 </div>
                 <br>
                 <br>
-                <div style="float:center; text-align:center">
-                    <button id= "authorView">View Reimbursments</button>
+                <div calss="container" id="data">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>amount</th>
+                                <th>description</th>
+                                <th>submited</th>
+                                <th>approved</th>
+                                <th>author</th>
+                                <th>resolver</th>
+                                <th>type</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                    
+                    <tbody id="remTable">
+                    </tbody>
+                </table>
                 </div>
+                <br><br><br>
+                <input class="btn btn-dark" value="back" id="back">
+                <br><br><br>
+                <input class="btn btn-info" value="logout" id="logout">
+
             </main>
         </div>
         <script src="../scripts/requestHandle.js"></script>

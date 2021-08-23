@@ -70,12 +70,13 @@ public class ReimbursementHibernate implements ReimbursementDao{
 	}
 
 	@Override
-	public void updateReimbursement(Reimbursement r) {
+	public boolean updateReimbursement(Reimbursement r) {
 		try(Session s = HibernateUtil.getSessionFactory().openSession()){
 			Transaction tx = s.beginTransaction();
 			s.update(r);
 			tx.commit();
 		}
+		return false;
 		
 	}
 

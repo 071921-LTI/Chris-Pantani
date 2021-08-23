@@ -11,7 +11,7 @@ public interface UserDao {
 	User getUserByUsername(String username) throws UserNotFoundException;
 	List<User> getUsers();
 	User addUser(User user);
-	void updateUser(User user);
+	boolean updateUser(User user);
 	void deleteUser(User user);
 	
 	

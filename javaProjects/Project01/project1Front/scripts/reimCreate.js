@@ -1,4 +1,5 @@
 document.getElementById("submitButton").addEventListener("click", createReim);
+document.getElementById("back").addEventListener("click", back);
 
 let token = sessionStorage.getItem("token");
 if(token === null){
@@ -34,4 +35,8 @@ function createReim(){
     let requestBody = `amount=${amount}&description=${description}&type=${type}`;
     xhr.send(requestBody);
     //window.location.href = "dashboard.html";
+}
+
+function back(){
+    window.location.href="EmployeePortal.html";
 }

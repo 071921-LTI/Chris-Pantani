@@ -50,12 +50,13 @@ public class UserHibernate implements UserDao{
 		return user;
 	}
 
-	public void updateUser(User user) {
+	public boolean updateUser(User user) {
 		try(Session s = HibernateUtil.getSessionFactory().openSession()){
 			Transaction tx = s.beginTransaction();
 			s.update(user);
 			tx.commit();
 		}
+		return false;
 		
 	}
 

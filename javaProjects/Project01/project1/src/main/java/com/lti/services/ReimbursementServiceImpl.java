@@ -40,7 +40,7 @@ public class ReimbursementServiceImpl implements ReimbursementService {
 		if(reimbursement == null) {
 			return false;
 		} else {
-			return true;
+			return rd.updateReimbursement(reimbursement);
 		}
 	}
 

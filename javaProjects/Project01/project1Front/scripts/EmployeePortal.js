@@ -13,7 +13,7 @@ function newRequest(){
 }
 
 function authorView(){
-    window.localation.href = "reimAuthor.html";
+    window.location.href = "reimAuthor.html";
 }
 
 function logout() {

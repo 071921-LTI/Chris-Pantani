@@ -30,5 +30,5 @@ function register(){
 }
 
 function login(){
-    window.location.href="register.html";
+    window.location.href="login.html";
 }

@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 		if(user == null) {
 			return false;
 		} else {
-			return true;
+			return ud.updateUser(user);
 		}
 	}
 

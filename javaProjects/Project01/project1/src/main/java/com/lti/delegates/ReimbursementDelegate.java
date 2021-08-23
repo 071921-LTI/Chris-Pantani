@@ -1,6 +1,7 @@
 package com.lti.delegates;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.List;
@@ -125,10 +126,52 @@ public class ReimbursementDelegate implements Delegatable {
 		String role = stringArr[1];
 		
 		User u = null;
+		Reimbursement ru = null;
+		ReimbursementStatus urs = null;
 		
+		InputStream request = rq.getInputStream();
+		
+		Reimbursement r = new ObjectMapper().readValue(request,Reimbursement.class);
+		System.out.println("updated info: "+r);
+		
+		urs = new ReimbursementStatus(r.getStatus().getStatusId(),r.getStatus().getStatus());
+		
+		System.out.println("Status object taken from json: "+urs);
+		
+		try {
+			u = us.getUserById(id);
+		} catch (UserNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		System.out.println("user: "+ u);
+		
+		try {
+			ru = res.getReimbursementById(r.getId());
+			System.out.println("original rem: "+ru);
+		} catch (ReimbursementNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ru.setResolver(u);
+		ru.setResolved(new Timestamp(System.currentTimeMillis()));
+		ru.setStatus(urs);
+		System.out.println("updated reimbursment: "+ru);
+		res.updateReimbursement(ru);
+		
+		
+		
+		
+		//Reimbursement r = res.getReimbursementById();
+		
+		/*
 		String status = rq.getParameter("status");
 		String sId = rq.getParameter("rid");
 		
+		
+		System.out.println(rq.getParameterNames());
 
 		
 		System.out.println("the retrieved status is"+ status);
@@ -136,7 +179,7 @@ public class ReimbursementDelegate implements Delegatable {
 		//int rId = Integer.parseInt(sId);
 		
 		
-		/*
+		
 		ReimbursementStatus rbs = rsd.getReimbursementStatusByStatus(status);
 		try {
 			System.out.println("status: "+status+"status id: "+sId+"user: "+u);
@@ -163,6 +206,9 @@ public class ReimbursementDelegate implements Delegatable {
 	@Override
 	public void handlePost(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
 		System.out.println("In handlePost reim");
+		
+		
+		
 		String token = rq.getHeader("Authorization");
 		
 		String[] stringArr = token.split(":");

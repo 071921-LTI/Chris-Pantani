@@ -7,34 +7,46 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<style>
+	table, th, td {
+	  border: 1px solid black;
+	}
+	</style>
 </head>
-<body onload= getReim()>
-	
+<body>
+	<!--
 	<p>inside Reimbursment view</p>
 		<p id="showData"></p>
 
-	<!-- 
+	  -->
+	  <p>inside view</p>
+	  
 	<div calss="container" id="data">
 		<table>
-			<thread>
+			<thead>
 				<tr>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
+					<th>id</th>
+					<th>amount</th>
+					<th>description</th>
+					<th>submited</th>
+					<th>approved</th>
+					<th>author</th>
+					<th>resolver</th>
+					<th>type</th>
+					<th>status</th>
 				</tr>
-			</thread>
+			</thead>
 		
 		<tbody id="remTable">
 		</tbody>
 	</table>
 
 	</div>
-	-->
+	
+	<br><br><br>
+	<div class="form-row">
+		<input class="btn btn-info" value="Back" id="back">
+	</div>
 
 	<script src="../scripts/reimAuthor.js"></script>
 </body>

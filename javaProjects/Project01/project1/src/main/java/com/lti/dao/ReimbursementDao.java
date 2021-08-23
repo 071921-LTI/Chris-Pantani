@@ -16,6 +16,6 @@ public interface ReimbursementDao {
 	List<Reimbursement> getReimbursementResolver(User u) throws UserNotFoundException;
 	List<Reimbursement> getReimbursementsByStatus(ReimbursementStatus rs, User author);
 	Reimbursement addReimbursement(Reimbursement r);
-	void updateReimbursement(Reimbursement r);
+	boolean updateReimbursement(Reimbursement r);
 	void deleteReimbursement(Reimbursement r);
 }
